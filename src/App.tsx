@@ -1,19 +1,25 @@
 import React from "react";
-import "./App.css";
-import { Button } from "@material-ui/core";
+import {
+  Grid,
+  Container,
+} from "@material-ui/core";
+import { TaskList } from "./components/TaskList/TaskList"
+import { TaskCreator } from "./components/TaskCreator/TaskCreator";
 
 const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
-      </header>
-    </div>
+    <>
+      <Container maxWidth="sm">
+        <Grid container direction="row" justify="center" alignItems="center">
+          <Grid item={true} xs={12}>
+            <TaskCreator />
+          </Grid>
+          <Grid item={true} xs={12}>
+            <TaskList taskLists={[]} />
+          </Grid>
+        </Grid>
+      </Container>
+    </>
   );
 };
 
