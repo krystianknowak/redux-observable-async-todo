@@ -1,12 +1,23 @@
 import React from "react";
-import {
-  Grid,
-  Container,
-} from "@material-ui/core";
-import { TaskList } from "./components/TaskList/TaskList"
+import { Grid, Container } from "@material-ui/core";
+import { TaskList } from "./components/TaskList/TaskList";
 import { TaskCreator } from "./components/TaskCreator/TaskCreator";
 
-const App = () => {
+import { Dispatch, AnyAction } from "redux";
+import { connect } from "react-redux";
+import { RootState } from "./store";
+import { TaskInterface } from "./types/appTypes";
+
+interface AppProps {
+  tasks: TaskInterface[];
+  isProgress: boolean;
+}
+
+const AppContainer: React.FC<AppProps> = (props: AppProps) => {
+  React.useEffect(() => {
+    console.log(props);
+  }, []);
+
   return (
     <>
       <Container maxWidth="sm">
@@ -23,4 +34,11 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = (state: RootState) => ({
+  tasks: state.tasks.tasks,
+  isProgress: state.tasks.isProgress
+});
+
+// const mapDispatchToProps = (dispatch: Dispatch<AnyAction>, props: OwnProps) => ({});
+
+export const App = connect(mapStateToProps)(AppContainer);
