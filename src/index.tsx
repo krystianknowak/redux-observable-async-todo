@@ -6,11 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import { store } from "./store";
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
-  }
-}
+
 
 const AppRoot = (
   <Provider store={store}>

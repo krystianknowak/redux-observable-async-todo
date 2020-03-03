@@ -1,29 +1,38 @@
 import React from "react";
-import { Grid, Container } from "@material-ui/core";
+import { Grid, Container, Box, Button } from "@material-ui/core";
 import { TaskList } from "./components/TaskList/TaskList";
 import { TaskCreator } from "./components/TaskCreator/TaskCreator";
-
-import { Dispatch, AnyAction } from "redux";
-import { connect } from "react-redux";
+import Add from "@material-ui/icons/Add";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "./store";
-import { TaskInterface } from "./types/appTypes";
+import { fetchTasksRequest } from "./reducers/actions";
 
-interface AppProps {
-  tasks: TaskInterface[];
-  isProgress: boolean;
-}
+interface AppProps {}
 
-const AppContainer: React.FC<AppProps> = (props: AppProps) => {
+export const App: React.FC<AppProps> = (props: AppProps) => {
   React.useEffect(() => {
     console.log(props);
   }, []);
+
+  const store = useSelector((state: RootState) => state.tasks);
+  const dispatch = useDispatch();
+  console.log(store);
 
   return (
     <>
       <Container maxWidth="sm">
         <Grid container direction="row" justify="center" alignItems="center">
           <Grid item={true} xs={12}>
-            <TaskCreator />
+            {/* <TaskCreator /> */}
+            <Box alignSelf="center">
+              <Button
+                onClick={() => dispatch(fetchTasksRequest)}
+                variant="contained"
+                color="primary"
+              >
+                <Add />
+              </Button>
+            </Box>
           </Grid>
           <Grid item={true} xs={12}>
             <TaskList taskLists={[]} />
@@ -33,12 +42,3 @@ const AppContainer: React.FC<AppProps> = (props: AppProps) => {
     </>
   );
 };
-
-const mapStateToProps = (state: RootState) => ({
-  tasks: state.tasks.tasks,
-  isProgress: state.tasks.isProgress
-});
-
-// const mapDispatchToProps = (dispatch: Dispatch<AnyAction>, props: OwnProps) => ({});
-
-export const App = connect(mapStateToProps)(AppContainer);

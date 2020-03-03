@@ -1,6 +1,41 @@
+import { TaskReducersActions, TaskInterface } from "../types/appTypes";
+
 export const FETCH_TASKS_REQUEST = "FETCH_TASKS_REQUEST";
 export const FETCH_TASKS_RESPONSE = "FETCH_TASKS_RESPONSE";
 export const FETCH_TASKS_ERROR = "FETCH_TASKS_ERROR";
+
+
+export const fetchTasksRequest = (): TaskReducersActions => {
+  return {
+    type: FETCH_TASKS_REQUEST,
+    payload: {
+      isProgress: true,
+      tasks: []
+    }
+  }
+}
+
+export const fetchTasksResponse = (tasks: TaskInterface[]): TaskReducersActions => {
+  return {
+    type: FETCH_TASKS_REQUEST,
+    payload: {
+      isProgress: false,
+      tasks: tasks
+    }
+  }
+}
+
+export const fetchTasksError = (): TaskReducersActions => {
+  return {
+    type: FETCH_TASKS_REQUEST,
+    payload: {
+      isProgress: false,
+      tasks: []
+    }
+  }
+}
+
+
 
 export const EDIT_TASK_REQUEST = "EDIT_TASK_REQUEST";
 export const EDIT_TASK_RESPONSE = "EDIT_TASK_RESPONSE";
